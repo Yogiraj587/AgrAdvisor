@@ -1,0 +1,164 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Agroadvisor</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <img src="{% static 'images/logo.jpg' %}" alt="Not found" class="logo">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Home section -->
+    <section id="home">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-wh">Agroadvisor</h3>
+                <h4 class="text-wh mx-auto my-4"><b>Get the best decisions and improve your farming strategies</b></h4>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col text-md-start">
+                    <h2 class="text-wh mx-auto my-4" style="padding:20px 0;">Why Agroadvisor ?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p style="font-size : large;" class="problem">
+                        Farmers face several challenges in agriculture related to crop selection, fertilizer selection, and disease management. 
+                        Crop selection involves factors such as market demand, climate suitability, and disease resistance. 
+                        Farmers must navigate these complexities to make informed choices for optimal yields and profitability. 
+                        Similarly, selecting the right fertilizers requires knowledge of soil nutrient deficiencies and crop nutrient requirements. 
+                        Over or under-fertilization can lead to imbalances, affecting plant health and productivity. 
+                    </p>
+                    <br>
+                    <p style="font-size : large;" class="description">
+                        Agroadvisor is an innovative project aimed at addressing the challenges faced by farmers in agriculture. 
+                        It provides valuable assistance in crop selection, fertilizer recommendation, and disease detection, empowering farmers with informed decision-making.
+                    </p>
+                </div>
+                <div class="col-md-6 img-fluid">
+                    <img src="{% static 'images/farming.jpg' %}" alt="Farming" class="img-thumbnail">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services we offer -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-wh mw-auto my-4" style="padding: 20px 0;">
+                    Services we offer
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://images.unsplash.com/photo-1511735643442-503bb3bd348a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3JvcHxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80" 
+                            class="card-img-top" alt="Not found">
+                        <div class="card-body">
+                          <h5 class="card-title"><strong>Crop Recommendation</strong></h5>
+                          <p class="card-text">Helping farmers choose the most suitable crops based on climate conditions, soil quality</p>
+                          <a href="{%url 'cropprediction' %}" class="btn btn-primary">Try it out</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://media.istockphoto.com/id/606230424/photo/agriculture.jpg?s=612x612&w=0&k=20&c=byKybbMGCEAgdgfgyvUXC2ttl_8nbfc7JKpKFYg6rw4=" 
+                            class="card-img-top" alt="Not found">
+                        <div class="card-body">
+                          <h5 class="card-title"><strong>Fertilizer Recommendation</strong></h5>
+                          <p class="card-text">Suggesting the most suitable fertiliser based on the crop.</p>
+                          <a href="#" class="btn btn-primary">Try it out</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVdGSXU_f1p6DMr1bc41h2_vZ3fpdeggakaw&usqp=CAU" 
+                            class="card-img-top" alt="Not found">
+                        <div class="card-body">
+                          <h5 class="card-title"><strong>Disease Diagnosis</strong></h5>
+                          <p class="card-text">Assisting in diagnosing the diseases of the plants by analysing the leaves.</p>
+                          <a href="#" class="btn btn-primary">Try it out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+    <br>
+    <footer class="footer bg-dark text-light" style="padding: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <h5>Contact</h5>
+              <ul class="list-unstyled">
+                <li>Email: yogi28bhagavatula@gmail.com</li>
+                <li>Phone: 1234567890</li>
+                <li>Address: H.no.2-19-56,7th Avenue,New Jersey,USA</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h5>Follow Me</h5>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a href="#"><i class="fa-brands fa-instagram fa-2xl" style="color: #511f4d;"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa-brands fa-twitter fa-2xl" style="color: #1f2151;"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fa-brands fa-facebook fa-2xl" style="color: #1f2951;"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
