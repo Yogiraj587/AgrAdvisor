@@ -44,42 +44,42 @@
             </div>
         </div>
 
-        <form action="" method="POST" class="main-form" style="margin: auto;">
+        <form action="{% url 'cropprediction' %}" method="POST" class="main-form" style="margin: auto;">
             {% csrf_token %}
             <div class="row">
                 <div class="col-md-4">
                     <label for="n_soil">Nitrogen Content</label>
-                    <input type="text" class="form-control" id="n_soil" placeholder="Enter the Nitrogen content" required>
+                    <input type="text" class="form-control" id="n_soil" name="n_soil" placeholder="Enter the Nitrogen content" required>
                 </div>
                 <div class="col-md-4">
                     <label for="p_soil">Phosphorus Content</label>
-                    <input type="text" class="form-control" id="p_soil" placeholder="Enter the Phosphorus content" required>
+                    <input type="text" class="form-control" id="p_soil" name="p_soil" placeholder="Enter the Phosphorus content" required>
                 </div>
                 <div class="col-md-4">
                     <label for="k_soil">Potassium Content</label>
-                    <input type="text" class="form-control" id="k_soil" placeholder="Enter the Potassium content" required>
+                    <input type="text" class="form-control" id="k_soil" name="k_soil" placeholder="Enter the Potassium content" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
                     <label for="temp">Temperature</label>
-                    <input type="text" class="form-control" id="temp" placeholder="Enter the Temperature" required>
+                    <input type="text" class="form-control" id="temp" name="temp" placeholder="Enter the Temperature" required>
                 </div>
                 <div class="col-md-4">
                     <label for="humidity">Humidity</label>
-                    <input type="text" class="form-control" id="humidity" placeholder="Enter the Humidity" required>
+                    <input type="text" class="form-control" id="humidity" name="humidity" placeholder="Enter the Humidity" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="pH">pH</label>
-                    <input type="text" class="form-control" id="pH" placeholder="Enter the pH" required>
+                    <label for="ph">ph</label>
+                    <input type="text" class="form-control" id="ph" name="ph" placeholder="Enter the pH" required>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
                     <label for="rainfall">Rainfall</label>
-                    <input type="text" class="form-control" id="rainfall" placeholder="Enter the Rainfall" required>
+                    <input type="text" class="form-control" id="rainfall" name="rainfall" placeholder="Enter the Rainfall" required>
                 </div>
             </div>
             <br>
@@ -100,7 +100,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <a href="#" class="btn btn-primary">Go Back</a>
+                    <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
                 </div>
             </div>
         </div>

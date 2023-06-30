@@ -1,23 +1,29 @@
 from django.shortcuts import render
 import joblib
-from joblib import load
 
-model = load("C:/Users/Yogiraj/VSCode/FullStackML/Harvestify/Model/croprecommendation.pkl")
+model = joblib.load("C:/Users/Yogiraj/VSCode/FullStackML/Harvestify/agroadvisor/cropmodel_joblib")
 def home(request):
     return render(request,'home.html')
 
 def cropprediction(request):
     if request.method=='POST':
-        n_soil = request.POST.get("n_soil",False)
-        p_soil = request.POST.get("p_soil",False)
-        k_soil = request.POST.get("k_soil",False)
-        temp = request.POST.get("temp",False)
-        humidity = request.POST.get("humidity",False)
-        ph = request.POST.get("ph",False)
-        rainfall = request.POST.get("rainfall",False)
+        n_soil = request.POST.get("n_soil")
+        p_soil = request.POST.get("p_soil")
+        k_soil = request.POST.get("k_soil")
+        temp = request.POST.get("temp")
+        humidity = request.POST.get("humidity")
+        ph = request.POST.get("ph")
+        rainfall = request.POST.get("rainfall")
 
-        prediction = model.predict([[n_soil,p_soil,k_soil,temp,humidity,
-                                    ph,rainfall]])
+        # print(n_soil)
+        # print(p_soil)
+        # print(k_soil)
+        # print(temp)
+        # print(humidity)
+        # print(ph)
+        # print(rainfall)
+
+        prediction = model.predict([[n_soil,p_soil,k_soil,temp,humidity,ph,rainfall]])
         print("The Best Crop is: ")
 
         if prediction[0] == 0:
