@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('',views.home,name="home"),
-    path('croppredict/',views.cropprediction,name="cropprediction")
+    path('croppredict/',views.cropprediction,name="cropprediction"),
+    path('fertiliser/',views.fertiliser,name="fertiliser")
 ]
