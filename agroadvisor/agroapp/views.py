@@ -1,14 +1,143 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 import pandas as pd
-import math
 import joblib
+from .models import Tasks
+from .forms import TaskForm
 from utils.fertiliser import fertiliser_info
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.contrib.auth import authenticate
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
 
-model = joblib.load("C:/Users/Yogiraj/VSCode/FullStackML/Harvestify/agroadvisor/cropmodel_joblib")
+def signup(request):
+    if request.method=='POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
 
+        if username and password1 and password2:
+            if password1 == password2:
+                if User.objects.filter(username=username).exists():
+                    messages.info(request, 'Username Taken')
+                    print('Username taken')
+                    return render(request,'signup.html')
+                elif User.objects.filter(email=email).exists():
+                    messages.info(request, 'Email Taken')
+                    print('Email taken')
+                    return render(request,'signup.html')
+                else:
+                    user = User.objects.create_user(username = username,email = email)
+                    user.set_password(password1)
+                    user.save()
+                    messages.info(request, 'User Created')
+                    print('user created')
+                    return render(request,'login.html')
+            else:
+                print('Password not matching')
+                messages.info(request,'Passwords not matching')
+        else:
+            print('username or password missing')
+            messages.info(request,'Passwords not matching')
+            return render(request,'signup.html')
+        
+        return render(request,'signup.html')
+    else:
+        return render(request,'signup.html')
+    
+def login(request):
+    if request.method=='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username = username, password = password)
+
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request,'Invalid Credentials')
+            return render(request,'login.html')
+        
+    else:
+        return render(request,'login.html')
+
+@never_cache
+@login_required(login_url='login')
+def logout(request):
+    messages.info(request, 'Successfully logged out')
+    auth.logout(request)
+    
+    response = redirect('/')
+    response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response['Pragma'] = 'no-cache'
+    response['Expires'] = '0'
+    
+    return response
+
+
+@login_required(login_url='login')
 def home(request):
     return render(request, 'home.html')
 
+@login_required(login_url='/')
+def tasks(request):
+    context = {
+        'tasks': Tasks.objects.all()
+    }
+    return render(request,'tasks.html',context)
+
+@login_required(login_url='login')
+def addtask(request):
+    context = {}
+    form = TaskForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+        else:
+            form = TaskForm()
+    
+    context = {
+        'tasks':form
+    }
+    return render(request, 'addtask.html',context)
+
+@login_required(login_url='login')
+def removetask(request,id):
+    obj = get_object_or_404(Tasks, id = id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('tasks')
+    
+    context = {}
+    return render(request,'removetask.html',context)
+
+@login_required(login_url='login')
+def updatetask(request,id):
+    form = TaskForm(request.POST or None, instance = Tasks.objects.get(id=id))
+
+    if request.method=="POST":
+        if form.is_valid():
+            form.save()
+            return redirect("tasks")
+
+    context = {
+        'tasks': form
+    }
+    return render(request,'updatetask.html',context)
+
+@login_required(login_url='login')
+def viewtask(request,id):
+    context = {
+        'tasks':Tasks.objects.get(id=id)
+    }
+    return render(request,'viewtask.html',context)
+
+@login_required(login_url='login')
 def cropprediction(request):
     if request.method == 'POST':
         n_soil = request.POST.get("n_soil")
@@ -18,6 +147,8 @@ def cropprediction(request):
         humidity = request.POST.get("humidity")
         ph = request.POST.get("ph")
         rainfall = request.POST.get("rainfall")
+
+        model = joblib.load("C:/Users/Yogiraj/VSCode/FullStackML/Harvestify/agroadvisor/cropmodel_joblib")
 
         prediction = model.predict([[n_soil, p_soil, k_soil, temp, humidity, ph, rainfall]])
         print("The Best Crop is: ")
@@ -41,6 +172,7 @@ def cropprediction(request):
 
     return render(request, 'cropprediction.html')
 
+@login_required(login_url='login')
 def fertiliser(request):
     if request.method=='POST':
         N = int(request.POST.get("nitrogen"))
@@ -48,10 +180,6 @@ def fertiliser(request):
         P = int(request.POST.get("phosphorus"))
         crop = str(request.POST.get("crop"))
 
-        print(N)
-        print(K)
-        print(P)
-        print(crop)
         
         df = pd.read_csv("C:/Users/Yogiraj/VSCode/FullStackML/Harvestify/agroadvisor/fertilizer.csv")
         nitrogen = df[df['Crop']==crop]['N'].iloc[0]

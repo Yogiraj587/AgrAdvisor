@@ -29,9 +29,12 @@
                 <a class="nav-link" href="#about">About</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="{% url 'tasks' %}">My Tasks</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="#services">Services</a>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
               </li>
             </ul>
           </div>

@@ -24,19 +24,19 @@
             <div class="row">
                 <div class="col mb-3">
                     <label for="nitrogen">Nitrogen Content</label>
-                    <input type="text" class="form-control" id="nitrogen" name="nitrogen" placeholder="Enter the amount of Nitrogen content" required>
+                    <input type="text" class="form-control" id="nitrogen" name="nitrogen" placeholder="Enter the amount of Nitrogen content" autocomplete="off" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col mb-3">
                     <label for="potassium">Potassium Content</label>
-                    <input type="text" class="form-control" id="potassium" name="potassium" placeholder="Enter the amount of Potassium content" required>
+                    <input type="text" class="form-control" id="potassium" name="potassium" placeholder="Enter the amount of Potassium content" autocomplete="off" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col mb-3">
                     <label for="phosphorus">Phosphorus Content</label>
-                    <input type="text" class="form-control" id="phosphorus" name="phosphorus" placeholder="Enter the amount of Phosphorus content" required>
+                    <input type="text" class="form-control" id="phosphorus" name="phosphorus" placeholder="Enter the amount of Phosphorus content" autocomplete="off" required>
                 </div>
             </div>
             <div class="row">
@@ -72,6 +72,9 @@
             <div class="row justify-content-center">
                 <div class="col-md-4 text-center">
                     <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
                 </div>
             </div>
         </form>
