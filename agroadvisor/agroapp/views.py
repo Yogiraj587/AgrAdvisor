@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 import pandas as pd
 import joblib
-from .models import Tasks
-from .forms import TaskForm
+from .models import todo
 from utils.fertiliser import fertiliser_info
 from django.contrib.auth.models import User
 from django.contrib import auth
@@ -48,6 +47,8 @@ def signup(request):
         return render(request,'signup.html')
     
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     if request.method=='POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -59,22 +60,22 @@ def login(request):
             return redirect('home')
         else:
             messages.info(request,'Invalid Credentials')
-            return render(request,'login.html')
-        
+            return redirect('login')
     else:
         return render(request,'login.html')
 
 @never_cache
 @login_required(login_url='login')
 def logout(request):
-    messages.info(request, 'Successfully logged out')
-    auth.logout(request)
+    if request.user.is_authenticated:
+        messages.info(request, 'Successfully logged out')
+        auth.logout(request)
     
-    response = redirect('/')
+    response = redirect("/")
     response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
     response['Pragma'] = 'no-cache'
     response['Expires'] = '0'
-    
+
     return response
 
 
@@ -82,60 +83,31 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
-@login_required(login_url='/')
+@login_required(login_url='login')
 def tasks(request):
+    if request.method=='POST':
+        task = request.POST.get('task')
+        new_todo = todo(user=request.user, todo_name=task)
+        new_todo.save()
+    all_todos = todo.objects.filter(user=request.user)
     context = {
-        'tasks': Tasks.objects.all()
+        'todos': all_todos
     }
     return render(request,'tasks.html',context)
 
 @login_required(login_url='login')
-def addtask(request):
-    context = {}
-    form = TaskForm(request.POST or None)
-
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('tasks')
-        else:
-            form = TaskForm()
-    
-    context = {
-        'tasks':form
-    }
-    return render(request, 'addtask.html',context)
+def Delete(request,name):
+    get_todo = todo.objects.get(user=request.user, todo_name=name)
+    get_todo.delete()
+    return render(request,'tasks.html')
 
 @login_required(login_url='login')
-def removetask(request,id):
-    obj = get_object_or_404(Tasks, id = id)
-    if request.method == 'POST':
-        obj.delete()
-        return redirect('tasks')
-    
-    context = {}
-    return render(request,'removetask.html',context)
+def Update(request, name):
+    get_todo = todo.objects.get(user=request.user, todo_name=name)
+    get_todo.status = True
+    get_todo.save()
+    return render(request,'tasks.html')
 
-@login_required(login_url='login')
-def updatetask(request,id):
-    form = TaskForm(request.POST or None, instance = Tasks.objects.get(id=id))
-
-    if request.method=="POST":
-        if form.is_valid():
-            form.save()
-            return redirect("tasks")
-
-    context = {
-        'tasks': form
-    }
-    return render(request,'updatetask.html',context)
-
-@login_required(login_url='login')
-def viewtask(request,id):
-    context = {
-        'tasks':Tasks.objects.get(id=id)
-    }
-    return render(request,'viewtask.html',context)
 
 @login_required(login_url='login')
 def cropprediction(request):
