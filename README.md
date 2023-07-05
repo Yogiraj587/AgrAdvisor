@@ -1,20 +1,21 @@
-# FitGenie
+# AgroAdvisor
 
 ## Inspiration
 
-Fitness is one of the important aspect of our life. Some people cannot go to gym for doing exercises due to many reasons such as no cost affordability, personal reasons, hectic schedule etc. It would be helpful for them if they can do the workouts in home. So, this was our inspiration to build an AI based gym assister.
+Farmers face several challenges in agriculture related to crop selection, fertilizer selection, and disease management. Farmers must navigate these complexities to make informed choices for optimal yields and profitability. Crop selection involves factors such as market demand, climate suitability, and disease resistance. Similarly, selecting the right fertilizers requires knowledge of soil nutrient deficiencies and crop nutrient requirements. Over or under-fertilization can lead to imbalances, affecting plant health and productivity.
 
 ![Kaia-Personal-Trainer-1024x636](https://user-images.githubusercontent.com/84268500/215325986-379b1ee0-2dfe-409f-a04f-24cfffebda45.jpg)
 
 ## About it 
 
-FitGenie is an AI based gym assister which assists people who prefer home workouts. Insttead of going to gym, this gym assister helps people to do exercises correctly and also counts the number of sets and reps. Users can create their own at-home regimen by choosing from a library of exercises. They can then use their webcams to check the quality of their form using the app's feedback.This can be a great help to people who cannot afford to go to gym or do not go due to some personal reasons.
+Agroadvisor is an innovative project aimed at addressing the challenges faced by farmers in agriculture. It provides valuable assistance in crop selection, fertilizer recommendation, and disease detection, empowering farmers with informed decision-making.
 
 ## Demo
 
-### Streamlit website
-![Image2](https://user-images.githubusercontent.com/84268500/215326094-8f460f7b-9e5d-45ec-9df4-96547b141bea.jpg)
+### Website
+![Screenshot (91)](https://github.com/Yogiraj587/AgroAdvisor/assets/84268500/a248df74-4bc6-4ecd-be2e-967cf8d918cc)
 ### Squats
+
 ![squats](https://user-images.githubusercontent.com/84268500/215326419-c261dfda-fbdb-4c6e-934d-cef09ba32fd1.jpeg)
 ### Biceps
 ![biceps](https://user-images.githubusercontent.com/84268500/215326450-0e16abfc-b788-4cd8-a32d-ff3d16daece1.jpeg)
