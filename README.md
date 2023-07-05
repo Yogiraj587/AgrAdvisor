@@ -10,54 +10,39 @@ Farmers face several challenges in agriculture related to crop selection, fertil
 
 Agroadvisor is an innovative project aimed at addressing the challenges faced by farmers in agriculture. It provides valuable assistance in crop selection, fertilizer recommendation, and disease detection, empowering farmers with informed decision-making.
 
-## Demo
+## What it does
 
-### Website
-![Screenshot (91)](https://github.com/Yogiraj587/AgroAdvisor/assets/84268500/a248df74-4bc6-4ecd-be2e-967cf8d918cc)
-### Squats
+### Crop Recommender
+1. Best crop will be suggested after entering the Nitrogen, Potassium, Phosphorus content in the soil, along with the rainfall. Temperature, Humidity will be fetched using OpenWeather API.
 
-![squats](https://user-images.githubusercontent.com/84268500/215326419-c261dfda-fbdb-4c6e-934d-cef09ba32fd1.jpeg)
-### Biceps
-![biceps](https://user-images.githubusercontent.com/84268500/215326450-0e16abfc-b788-4cd8-a32d-ff3d16daece1.jpeg)
+![image](https://github.com/Yogiraj587/AgroAdvisor/assets/84268500/451fc40e-0f9a-47c4-8fbd-d0a07a7dea4e)
+
 
 ## How we built it
 
-We have built this application using OpenCV, Mediapipe for capturing and visualizing the exercises of the user. This python web application was hosted using streamlit and deployed in Heroku. 
+1. The Crop Recommendation and Fertiliser Recommendation models were trained using Random Forest Classifier model.
+2. The Leaf Disease Detector was trained using Resnet-50 deep learning model.
+3. HTML, CSS, and Bootstrap were used to create the user interface.
+4. We used Django as our backend to integrate our Deep learning model with the UI.
+5. We have also added User Authentication and Task Management using Django.
 
 ## Challenges we ran into
 
-1. Being one camera connected at a time prevented us from being able to have as many exercises we wnated to do.
-2. Giving the exact angles for the exercises for correct detection was not easy.
-3. Testing our model required open and spatial environment and accurate tracking of movements was difficult.
+1. Performing EDA, Feature Engineering on the Indian crop dataset was a bit difficult.
+2. Deep learning model training required a significant amount of time and computation power.
+3. It was difficult to integrate our deep learning model with the user interface.
+4. Improving the model's accuracy was an aesthetic taste.
 
 ## Accomplishments we are proud of 
 
-1. One accomplishment was that we have learnt how to use streamlit for hosting our python web applications and deployment in Heroku.
-2. We have learnt how to use Opencv and mediapipe for human pose tracking.
+1. We were able to create a model that can recommend crops, fertilisers based on the user's input.
+2. Developing a full stack web application and incorporating this model was incredible.
 
 ## What we Learned
- 
-We have learnt about opencv, mediapipe tools for computer vision. We have learnt about streamlit and how to host python applications in streamlit. 
+We have discovered a lot about Data Cleaning, Feature Engineering, Machine Learning, Deep Learning. Gained hands on experience with MLOps. We have worked on with Django for interacting with the web application.
 
 ## What's next for FitGenie
  
-One of the improvements is that we could add a feature such that users can be able to add their wn type of exercises, so that they will not be limited to the exercises that we have provided.
-
-One camera being attached at a time was one of the main problems we ran across because it limited the number of workouts we could perform. This is crucial and an enhancement because it allows us to add new workouts and let the user choose how to train without having to adjust the camera.
-
-## Requirements
-```
-pip install opencv-python
-pip install mediapipe
-pip install streamlit
-pip install streamlit_lottie
-pip install requests
-pip install PIL
-pip install st-annotated-text
-```
-
-## Command for executing
-Clone this repository using ```git clone``` and after entering inside the folder run:
-```
-python -m streamlit run app.py
-```
+1. Implementing Face recognition for user authentication and authorisation.
+2. Working to improve the accuracy of the models.
+3. Should include more features like weather prediction etc.
